@@ -1,0 +1,103 @@
+<br>
+<div class="container">
+  <div class="row">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">
+            Welcome <span *ngFor="let info of userDetail">{{info.firstName}} {{info.lastName}}</span>
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a [routerLink]="['/login']"><span class="glyphicon glyphicon-home"></span> Home</a>
+          </li>
+          <li>
+            <a [routerLink]="['/add', 'user']"><span class="glyphicon glyphicon-plus"></span> Add New User</a>
+          </li>
+           <li>
+            <a [routerLink]="['/add', 'admin']"><span class="glyphicon glyphicon-plus"></span> Add New Admin</a>
+          </li>
+          <li>
+            <a>
+              <span *ngFor="let info of userDetail">
+                Logged In As: {{info.username}}
+              </span>
+            </a> 
+          </li>
+          <li>
+            <a>
+              <button class="btn btn-xs btn-default" (click)="logout()">
+                <span class="glyphicon glyphicon-log-out"></span> Logout
+              </button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row text-center">
+    <h3 class="text-uppercase">Edit Admin</h3>
+    <br>
+  </div>
+
+  <div class="col-sm-6">
+      <div class="panel panel-default">
+      <div class="panel-heading"><h4>Admin Info</h4></div>
+      <div class="panel-body">
+        <form (submit)="editAdmin(id.value, firstName.value, lastName.value, email.value)" ngNativeValidate *ngFor="let detail of adminInfo">
+        <p>Update Fields for the ADMINID {{detail.aid}}</p>
+          <table class="table table-hover">
+            <tr>
+              <th>First Name</th>
+              <td>
+                <input type="text" [value]=detail.firstName #firstName required>
+                <input type="hidden" [value]=detail.aid #id>
+              </td>
+              <th>Last Name</th>
+              <td>
+                <input type="text" [value]=detail.lastName #lastName required>
+              </td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td colspan="3">
+                <input type="email" [value]=detail.email #email required>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <button type="submit" class="btn btn-block btn-success">Update Admin Information</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+      <div class="panel panel-default">
+      <div class="panel-heading"><h4>Login Information</h4></div>
+      <div class="panel-body">
+        <form (submit)="editLogin(id.value, username.value)" ngNativeValidate *ngFor="let detail of adminLogin">
+        <p>Login Details for ADMINID {{detail.id}} </p>
+          <table class="table table-hover">
+            <tr>
+              <th>Username</th>
+              <td>
+                <input type="hidden" [value]=detail.id #id>
+                <input type="text" [value]=detail.username #username required>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <button type="submit" class="btn btn-block btn-default">Update Login Information</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>

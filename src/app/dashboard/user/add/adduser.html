@@ -1,0 +1,91 @@
+<br>
+<div class="container">
+  <div class="row">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">
+          	Welcome <span *ngFor="let info of userDetail">{{info.firstName}} {{info.lastName}}</span>
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a [routerLink]="['/login']"><span class="glyphicon glyphicon-home"></span> Home</a>
+          </li>
+          <li>
+            <a [routerLink]="['/add', 'user']"><span class="glyphicon glyphicon-plus"></span> Add New User</a>
+          </li>
+          <li>
+            <a [routerLink]="['/add', 'admin']"><span class="glyphicon glyphicon-plus"></span> Add New Admin</a>
+          </li>
+        	<li>
+        		<a>
+	        		<span *ngFor="let info of userDetail">
+								Logged In As: {{info.username}}
+							</span>
+						</a> 
+        	</li>
+          <li>
+          	<a>
+          		<button class="btn btn-xs btn-default" (click)="logout()">
+          			<span class="glyphicon glyphicon-log-out"></span> Logout
+          		</button>
+          	</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="col-sm-8 col-sm-offset-2">
+      <div class="panel panel-default">
+      <div class="panel-heading"><h4>New User</h4></div>
+      <div class="panel-body">
+        <form (submit)="addUser($event)" ngNativeValidate>
+          <p>Fill out the following form to assign a new user to an admin.</p>
+          <table class="table table-hover">
+            <tr>
+              <th>First Name</th>
+              <td>
+                <input type="text" [(ngModel)]="firstName" name="firstName" required>
+              </td>
+              <th>Last Name</th>
+              <td>
+                <input type="text" [(ngModel)]="lastName" name="lastName" required>
+              </td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td>
+                <input type="email" [(ngModel)]="email" name="email" required>
+              </td>
+              <th>Admin</th>
+              <td>
+                <select id="power" [(ngModel)]="admin" name="admin" required>
+                  <option selected disabled>Select Admin</option>
+                  <option *ngFor="let admin of admins" [value]=admin.aid>{{admin.firstName}} {{admin.lastName}}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Username</th>
+              <td>
+                <input type="text" [(ngModel)]="username" name="username" required>
+              </td>
+              <th>Password</th>
+              <td>
+                <input type="password" [(ngModel)]="password" name="password" required>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <button type="submit" class="btn btn-block btn-success">Add User</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  </div>

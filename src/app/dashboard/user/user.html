@@ -1,0 +1,23 @@
+<br>
+<div class="container">
+  <div class="row">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">
+          	Hi <span *ngFor="let info of userDetail">{{info.firstName}} {{info.lastName}} You are our valued customer.</span>
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a>
+              <button class="btn btn-xs btn-default" (click)="logout()">
+                <span class="glyphicon glyphicon-log-out"></span> Logout
+              </button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

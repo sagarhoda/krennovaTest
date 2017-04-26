@@ -1,0 +1,179 @@
+<br>
+<div class="container">
+  <div class="row">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">
+          	Welcome <span *ngFor="let info of userDetail">{{info.firstName}} {{info.lastName}}</span>
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a [routerLink]="['/add', 'user']"><span class="glyphicon glyphicon-plus"></span> Add New User</a>
+          </li>
+           <li>
+            <a [routerLink]="['/add', 'admin']"><span class="glyphicon glyphicon-plus"></span> Add New Admin</a>
+          </li>
+        	<li>
+        		<a>
+	        		<span *ngFor="let info of userDetail">
+								Logged In As: {{info.username}}
+							</span>
+						</a> 
+        	</li>
+          <li>
+          	<a>
+          		<button class="btn btn-xs btn-default" (click)="logout()">
+          			<span class="glyphicon glyphicon-log-out"></span> Logout
+          		</button>
+          	</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="row panel panel-default">
+  	<div class="panel-heading">
+  		<h4>Personal Details</h4>
+  	</div>
+  	<div class="panel-body">
+	    <span *ngFor="let info of userDetail">
+	    	<strong>Super Admin ID: {{info.id}}</strong> | E-Mail: {{info.email}} | Role: <strong><u><i>{{info.role}}</i></u></strong>
+			</span>    
+  	</div>
+  </div>
+
+  <div class="col-sm-12">
+  	<div class="row panel panel-default">
+	  	<div class="panel-heading text-uppercase">Available Super Admins</div>
+	  </div>
+	  <div class="panel-body">
+	  	<table class="table table-hover">
+	      <thead>
+	        <tr>
+            <th>Super Admin ID</th>
+	          <th>Name</th>
+	          <th>Username</th>
+	          <th>E-Mail</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr *ngFor="let superadmin of superadmins">
+            <th>{{superadmin.sid}}</th>
+	          <th>{{superadmin.firstName}} {{superadmin.lastName}}</th>
+	          <th>{{superadmin.username}}</th>
+	          <th>{{superadmin.email}}</th>
+	        </tr>
+	      </tbody>
+	    </table>
+	  </div>
+  </div>
+
+  <div class="col-sm-12">
+  	<div class="row panel panel-default">
+	  	<div class="panel-heading text-uppercase">Available Admins</div>
+	  </div>
+	  <div class="panel-body">
+	  	<table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Admin ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>E-Mail</th>
+          <th>Creator ID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let admin of notFreeAdmins">
+          <th>
+            <button class="btn btn-xs btn-default glyphicon glyphicon-remove" disabled></button>
+          </th>
+          <th>{{admin.aid}}</th>
+          <th>{{admin.firstName}}</th>
+          <th>{{admin.lastName}}</th>
+          <th>{{admin.email}}</th>
+          <th>{{admin.createdBy}}</th>
+          <th>
+            <form (ngSubmit)="editAdmin(adminid.value)">
+              <input type="hidden" name="adminid" value="{{admin.aid}}" #adminid>
+              <button class="btn btn-xs btn-info glyphicon glyphicon-edit"></button>
+            </form>
+          </th>
+        </tr>
+
+        <tr *ngFor="let admin of freeAdmins">
+          <th>
+            <form (ngSubmit)="deleteAdmin(adminid.value)">
+                <input type="hidden" name="adminid" value="{{admin.aid}}" #adminid>
+                <button class="btn btn-xs btn-danger glyphicon glyphicon-trash"></button>
+            </form>
+          </th>
+          
+          <th>{{admin.aid}}</th>
+          <th>{{admin.firstName}}</th>
+          <th>{{admin.lastName}}</th>
+          <th>{{admin.email}}</th>
+          <th>{{admin.createdBy}}</th>
+          <th>
+            <form (ngSubmit)="editAdmin(adminid.value)">
+              <input type="hidden" name="adminid" value="{{admin.aid}}" #adminid>
+              <button class="btn btn-xs btn-info glyphicon glyphicon-edit"></button>
+            </form>
+          </th>
+        </tr>
+
+      </tbody>
+    </table>
+    <p class="text-uppercase alert alert-info text-center">Note: Admin users can only be deleted if there is no users assigned under it</p>
+	  </div>
+  </div>
+
+<div class="col-sm-12">
+    <div class="row panel panel-default">
+      <div class="panel-heading text-uppercase">Available Users</div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>User ID</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Username</th>
+          <th>E-Mail</th>
+          <th>CreatorID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th>
+            <form (ngSubmit)="deleteUser(userid.value)">
+              <input type="hidden" name="userid" value="{{user.id}}" #userid>
+              <button class="btn btn-xs btn-danger glyphicon glyphicon-trash"></button>
+            </form>
+          </th>
+          <th>{{user.id}}</th>
+          <th>{{user.firstName}}</th>
+          <th>{{user.lastName}}</th>
+          <th>{{user.username}}</th>
+          <th>{{user.email}}</th>
+          <th>{{user.createdBy}}</th>
+          <th>
+            <form (ngSubmit)="editUser(userid.value)">
+              <input type="hidden" name="userid" value="{{user.id}}" #userid>
+              <button class="btn btn-xs btn-info glyphicon glyphicon-edit"></button>
+            </form>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  
+  
