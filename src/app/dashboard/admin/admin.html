@@ -52,6 +52,7 @@
           <th>Lastname</th>
           <th>Username</th>
           <th>E-Mail</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +68,12 @@
           <th>{{user.lastName}}</th>
           <th>{{user.username}}</th>
           <th>{{user.email}}</th>
+          <th>
+            <form (ngSubmit)="editUser(userid.value)">
+              <input type="hidden" name="userid" value="{{user.id}}" #userid>
+              <button class="btn btn-xs btn-info glyphicon glyphicon-edit"></button>
+            </form>
+          </th>
         </tr>
       </tbody>
     </table>

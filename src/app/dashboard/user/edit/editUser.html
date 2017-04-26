@@ -13,12 +13,6 @@
             <a [routerLink]="['/login']"><span class="glyphicon glyphicon-home"></span> Home</a>
           </li>
           <li>
-            <a [routerLink]="['/add', 'user']"><span class="glyphicon glyphicon-plus"></span> Add New User</a>
-          </li>
-           <li>
-            <a [routerLink]="['/add', 'admin']"><span class="glyphicon glyphicon-plus"></span> Add New Admin</a>
-          </li>
-          <li>
             <a>
               <span *ngFor="let info of userDetail">
                 Logged In As: {{info.username}}
@@ -47,7 +41,7 @@
       <div class="panel-heading"><h4>User Info</h4></div>
       <div class="panel-body">
         <form (submit)="editUser(id.value, firstName.value, lastName.value, email.value)" ngNativeValidate *ngFor="let detail of userInfo">
-        <p>Update Fields for the USERID {{detail.id}}</p>
+        <p>Update Fields for ID {{detail.id}}</p>
           <table class="table table-hover">
             <tr>
               <th>First Name</th>
@@ -82,7 +76,7 @@
       <div class="panel-heading"><h4>Login Information</h4></div>
       <div class="panel-body">
         <form (submit)="editLogin(id.value, username.value)" ngNativeValidate *ngFor="let detail of userLogin">
-        <p>Login Details for USERID {{detail.id}} </p>
+        <p>Login Details for ID {{detail.id}} </p>
           <table class="table table-hover">
             <tr>
               <th>Username</th>

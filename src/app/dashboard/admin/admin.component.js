@@ -67,6 +67,9 @@ var AdminComponent = (function () {
         location.reload();
         this.router.navigate(['login']);
     };
+    AdminComponent.prototype.editUser = function (id) {
+        this.router.navigate(['edit/user/' + id]);
+    };
     AdminComponent.prototype.logout = function () {
         this.dataservice.logout();
     };

@@ -93,6 +93,10 @@ export class AdminComponent {
 
 	}
 
+	editUser(id){
+		this.router.navigate(['edit/user/'+id]);	
+	}
+
 
 	logout(){
 		this.dataservice.logout();
